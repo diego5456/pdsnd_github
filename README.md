@@ -20,6 +20,15 @@ will display some basic statistics such as:
   * Count of each gender (if available)
   * Earliest and latest birth year and the most common (if available)
 
+### Instructions
+* [Python 3](https://www.python.org/downloads/)
+* [Pandas](https://pypi.org/project/pandas/)
+  *  ```pip install pandas```
+* [Numpy](https://pypi.org/project/numpy/)
+  * ```pip install numpy```
+* Run the following command
+  * ```python <repo_location>/bikeshare.py```
+
 ### Files used
 Data is given in csv format.
 
