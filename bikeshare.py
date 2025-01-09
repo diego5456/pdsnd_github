@@ -7,7 +7,8 @@ import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
+              'washington': 'washington.csv',
+              'miami': 'miami.csv'}
 MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 FILTER_TYPES = ['month', 'day', 'both', 'none']
@@ -65,7 +66,11 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-    df = pd.read_csv(CITY_DATA[city])
+    try:
+        df = pd.read_csv(CITY_DATA[city])
+    except Exception as e:
+        print(f"Error encounter reading the file: {e}")
+        return None
 
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
@@ -173,19 +178,26 @@ def display_count_stats(series_dict, display_all=False):
                 print(f"{index} - {value}")
         else:
             print(f"{name}: {series_count.idxmax()}, Count: {series_count.max()}")
-
+def restart_prompt():
+    restart = input('\nWould you like to restart? Enter yes or no.\n')
+    if restart.lower() != 'yes':
+        return False
+    return True
 
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
+        if df is None:
+            if restart_prompt():
+                continue
+            else:
+                break
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+        if not restart_prompt():
             break
 
 
