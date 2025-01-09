@@ -7,8 +7,7 @@ import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv',
-              'miami': 'miami.csv'}
+              'washington': 'washington.csv'}
 MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 FILTER_TYPES = ['month', 'day', 'both', 'none']
